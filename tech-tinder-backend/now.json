@@ -1,0 +1,5 @@
+{
+  "env": {
+    "STITCH_APP_ID": "@tech-tinder-stitch-app-id"
+  }
+}
