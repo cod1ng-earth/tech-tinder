@@ -56,6 +56,19 @@
             <div class="card column">
               <div class="card-image">
                 <figure class="image">
+                    <img class="is-circular" src="https://rotfuks.de/static/img/assets/profile.jpeg" alt="@PranavGulati95" />
+                </figure>
+              </div>
+              <div class="card-content">
+                 <p class="title is-4">Dominik Kress</p>
+                <div class="subtitle is-6">
+                  <p><a href="https://github.com/Rotfuks">https://github.com/Rotfuks</a></p>
+                </div>
+              </div>
+            </div>
+            <div class="card column">
+              <div class="card-image">
+                <figure class="image">
                     <img class="is-circular" src="https://pbs.twimg.com/profile_images/501657315884662784/6PlH-UCl_400x400.jpeg" alt="@PranavGulati95" />
                 </figure>
               </div>
