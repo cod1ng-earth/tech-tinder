@@ -31,6 +31,14 @@ router.get("/random", (req, res) => {
   });
 });
 
+router.get("/stats", (req, res) => {
+  client.callFunction("technology_aggregate", []).then(result => {
+    res.json({
+      result
+    });
+  });
+});
+
 router.get("/:technologyId", (req, res) => {
   client
     .callFunction("gettechnology", [req.params.technologyId])
@@ -43,7 +51,7 @@ router.get("/:technologyId", (req, res) => {
 
 router.get("/:technologyId/stats", (req, res) => {
   client
-    .callFunction("technology_stats", [req.params.technologyId])
+    .callFunction("technology_aggregate", [req.params.technologyId])
     .then(result => {
       res.json({
         result
