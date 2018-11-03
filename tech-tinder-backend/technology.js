@@ -55,10 +55,10 @@ router.get("/:technologyId/stats", (req, res) => {
     client.callFunction("technology_get_votes", [req.params.technologyId])
   ];
   Promise.all(promises).then(allResults => {
-    aggregate = allResults[0][0]; // not nice but... necessary?
-    aggregate.users = allResults[1];
+    result = allResults[0][0]; // not nice but... necessary?
+    result.users = allResults[1];
     res.json({
-      aggregate
+      result
     });
   });
 });
