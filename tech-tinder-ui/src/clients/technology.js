@@ -1,19 +1,19 @@
-import axios from 'axios';
+import {axiosInstance} from '~/main.js';
 
 export default {
-    get(id) {
-        return Promise.resolve({
-            data: {
-                name: "PHP 7.4",
-                description: "PHP is very bad",
-                category: "language"
-            }
-        });
-        
-//        return axios.get('/technology/' + id)
-//            .then((response) => response.data);
+    get(id) {        
+       return axiosInstance.get(`/technology/${id}`)
+           .then((response) => response.data);
+    },
+    getRandom() {        
+       return axiosInstance.get('/technology/random')
+           .then((response) => response.data);
     },
     add(payload) {
-        return axios.post('https://tech-tinder.now.sh/technology', payload).then((response) => response.data);
+        return axiosInstance.post('/technology', payload)
+            .then((response) => response.data);
+    },
+    addVote(id, opinion) {
+        return axiosInstance.post(`/technology/${id}/vote`, {opinion: opinion});
     }
 }

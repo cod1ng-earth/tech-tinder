@@ -26,7 +26,7 @@
 </template>
 
 <script>
-    import TechnologyClient from '../clients/technology.js';
+    import TechnologyClient from '~/clients/technology.js';
 
     export default {
         data() {
@@ -37,7 +37,7 @@
         },
 
         methods: {
-            addTechnology: function(event) {
+            addTechnology: function() {
                 let loadingComponent = this.$loading.open({
                     container: null
                 })
@@ -55,7 +55,7 @@
                     loadingComponent.close();
                 }).catch((error) => {
                     this.$toast.open({
-                        message: 'Save technology failed.',
+                        message: 'Save technology failed. ' + error,
                         type: 'is-danger'
                     })
                     loadingComponent.close();
