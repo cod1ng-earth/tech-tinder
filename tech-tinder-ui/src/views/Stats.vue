@@ -7,7 +7,7 @@
                         <stats-chart :data-holder="createDataHolder(stat)" :options="barOptions"></stats-chart>
                     </div>
                     <div class="media-content">
-                        <div class="title is-4">{{ stat.name }}</div>
+                        <div class="title is-4"><router-link :to="'/stats/'+stat._id">{{ stat.name }}</router-link></div>
                         <div v-html="stat.description"></div>
                     </div>
                 </div>
@@ -22,10 +22,13 @@ import TechnologyClient from "~/clients/technology.js";
 import StatsChart from "@/StatsChart";
 
 export default {
+  mounted() {
+    this.loadStats();
+  },
   data() {
     return {
       isLoading: true,
-      stats: this.loadStats(),
+      stats: null,
       barOptions: {
         scales: {
           yAxes: [
@@ -59,7 +62,6 @@ export default {
           this.isLoading = false;
         })
         .catch(error => {
-          console.log(error);
           this.$toast.open({
             message: "Could not load stats. " + error,
             type: "is-danger"

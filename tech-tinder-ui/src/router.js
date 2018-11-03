@@ -30,6 +30,10 @@ export default new Router({
       path: '/stats',
       name: 'stats',
       component: () => import('./views/Stats.vue')
+    },
+    {
+      path: '/stats/:id',
+      component: () => import('./views/StatsDetails.vue')
     }
   ]
 })
