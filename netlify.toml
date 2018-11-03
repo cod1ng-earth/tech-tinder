@@ -7,5 +7,5 @@
 
 [build]
   base    = "tech-tinder-ui"
-  publish = "dist"
+  publish = "tech-tinder-ui/dist"
   command = "npm run build"
