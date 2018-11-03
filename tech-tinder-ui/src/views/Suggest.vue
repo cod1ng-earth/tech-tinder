@@ -1,15 +1,26 @@
 <template>
-    <div>
-        <h1>Suggest</h1>
-        <section>
-            <form @submit.prevent="addTechnology">
-                <input name="name" v-model="name" placeholder="name"><br>
-                <input name="description" v-model="description" placeholder="description"><br>
-                <input type="submit" value="submit">
-            </form>
-        </section>
-
-    </div>
+    <section>
+        <div class="hero-body">
+        <div class="container">
+            <b-field label="Name">
+                <b-input v-model="name"></b-input>
+            </b-field>
+            <b-field label="Description">
+                <b-input maxlength="200" type="textarea" v-model="description"></b-input>
+            </b-field>
+            <p class="control buttons">
+                <button class="button is-primary" @click="addTechnology">
+                    <b-icon icon="plus-circle"></b-icon>
+                    <span>Submit</span>
+                </button>
+                <button class="button is-light" @click="clear">
+                    <b-icon icon="minus-circle"></b-icon>
+                    <span>Cancel</span>
+                </button>
+            </p>
+        </div>
+        </div>
+    </section>
 </template>
 
 <script>
@@ -29,9 +40,12 @@
                     name: this.name,
                     description: this.description
                 }).then(() => {
-                    this.name = null;
-                    this.description = null;
+                    clear();
                 });
+            },
+            clear: function() {
+                this.name = null;
+                this.description = null;
             }
         }
     }
