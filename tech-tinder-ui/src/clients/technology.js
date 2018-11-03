@@ -14,6 +14,6 @@ export default {
 //            .then((response) => response.data);
     },
     add(payload) {
-        return axios.post('https://tech-tinder-backend-mkkkpcnktn.now.sh/technology', payload).then((response) => response.data);
+        return axios.post('https://tech-tinder.now.sh/technology', payload).then((response) => response.data);
     }
 }
