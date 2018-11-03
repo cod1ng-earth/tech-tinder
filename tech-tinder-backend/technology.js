@@ -50,13 +50,17 @@ router.get("/:technologyId", (req, res) => {
 });
 
 router.get("/:technologyId/stats", (req, res) => {
-  client
-    .callFunction("technology_aggregate", [req.params.technologyId])
-    .then(result => {
-      res.json({
-        result
-      });
+  const promises = [
+    client.callFunction("technology_aggregate", [req.params.technologyId]),
+    client.callFunction("technology_get_votes", [req.params.technologyId])
+  ];
+  Promise.all(promises).then(allResults => {
+    aggregate = allResults[0][0]; // not nice but... necessary?
+    aggregate.users = allResults[1];
+    res.json({
+      aggregate
     });
+  });
 });
 
 router.post("/:technologyId/vote", jsonParser, (req, res, next) => {
