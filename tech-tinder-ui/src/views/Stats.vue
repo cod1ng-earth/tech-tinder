@@ -1,15 +1,32 @@
 <template>
     <section>
-        <stats-chart :data-holder="{
-          labels: ['January', 'Feb'],
-          datasets: [
-            {
-              label: 'Data One',
-              backgroundColor: '#f87979',
-              data: [40, 20]
-            }
-          ]
-      }" :options="{
+        <div class="container hero-body">
+            <div class="box" v-for="stat in stats" :key="stat._id">
+                <div class="media">
+                    <div class="media-left">
+                        <stats-chart :data-holder="createDataHolder(stat)" :options="barOptions"></stats-chart>
+                    </div>
+                    <div class="media-content">
+                        <div class="title is-4">{{ stat.name }}</div>
+                        <div v-html="stat.description"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      <b-loading :active.sync="isLoading"></b-loading>
+    </section>
+</template>
+
+<script>
+import TechnologyClient from "~/clients/technology.js";
+import StatsChart from "@/StatsChart";
+
+export default {
+  data() {
+    return {
+      isLoading: true,
+      stats: this.loadStats(),
+      barOptions: {
         scales: {
           yAxes: [
             {
@@ -21,25 +38,59 @@
           ]
         },
         legend: {
-          display: true,
-          position: 'bottom',
-          labels: {
-            boxWidth: 0,
-            fontSize: 20,
-            fontStyle: 'Bold'
-          }
+          display: false
         }
-      }"></stats-chart>
-    </section>
-</template>
+      }
+    };
+  },
 
-<script>
-import StatsChart from '@/StatsChart';
+  methods: {
+    loadStats: function() {
+      TechnologyClient.getStats()
+        .then(data => {
+          this.stats = data.result.map(stat => {
+            let results = stat.votes.results;
+            stat.votes.results = Object.assign(
+              { using: 0, evaluating: 0, interested: 0, discouraged: 0 },
+              results
+            );
+            return stat;
+          });
+          this.isLoading = false;
+        })
+        .catch(error => {
+          console.log(error);
+          this.$toast.open({
+            message: "Could not load stats. " + error,
+            type: "is-danger"
+          });
 
-export default {
-    components: {
-        StatsChart
+          this.isLoading = false;
+        });
+    },
+    createDataHolder: function(stat) {
+      return {
+        labels: Object.keys(stat.votes.results),
+        datasets: [
+          {
+            label: stat.name,
+            backgroundColor: "#f87979",
+            data: Object.values(stat.votes.results),
+            backgroundColor: [
+              "rgba(32, 156, 238, 0.4)",
+              "rgba(255, 221, 87, 0.4)",
+              "rgba(35, 209, 96, 0.4)",
+              "rgba(255, 56, 96, 0.4)"
+            ]
+          }
+        ]
+      };
     }
+  },
+
+  components: {
+    StatsChart
+  }
 };
 </script>
 
