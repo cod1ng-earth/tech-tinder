@@ -25,12 +25,23 @@ router.post("/", jsonParser, (req, res) => {
   });
 });
 
-router.get("/random", (req, res) => {
-  client.callFunction("random_technology", [null]).then(result => {
-    res.redirect("/technology/" + result.id);
-  });
-});
+router.get("/random/:cnt?", (req, res) => {
+  client
+    .callFunction("random_technology_many", [
+      req.params.cnt ? parseInt(req.params.cnt) : null
+    ])
+    .then(result => {
+      console.log(result);
 
+      if (!req.params.cnt) {
+        res.redirect("/technology/" + result[0]._id);
+      } else {
+        res.json({
+          result
+        });
+      }
+    });
+});
 router.get("/stats", (req, res) => {
   client.callFunction("technology_aggregate", []).then(result => {
     res.json({
