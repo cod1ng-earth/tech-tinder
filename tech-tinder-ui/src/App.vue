@@ -16,7 +16,6 @@
 
         <div id="techTinderNav" class="navbar-menu" :class="{ 'is-active' : showNavigation }" @click="toggleNavigation">
           <div class="navbar-start">
-            <router-link to="/" class="navbar-item" active-class="is-active" exact>Home</router-link>
             <router-link to="/vote" class="navbar-item" active-class="is-active">Vote</router-link>
             <router-link to="/suggest" class="navbar-item" active-class="is-active">Suggest</router-link>
             <router-link to="/stats" class="navbar-item" active-class="is-active">Stats</router-link>
