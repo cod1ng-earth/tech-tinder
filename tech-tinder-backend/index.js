@@ -21,8 +21,8 @@ app.use((req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
-  logger.error(err.stack);
-  res.status(500).send("That was bad!");
+  logger.error(err.stack || err.msg);
+  res.status(500).json({ error: err.msg });
 });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

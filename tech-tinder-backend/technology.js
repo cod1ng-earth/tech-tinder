@@ -3,6 +3,9 @@ const jsonParser = require("body-parser").json();
 const router = express.Router();
 
 const client = require("./stitch-client.js");
+
+const allowedOpinions = ["interested", "discouraged", "evaluating", "using"];
+
 router.get("/", function(req, res) {
   client
     .callFunction("technologies", [null])
@@ -36,6 +39,26 @@ router.get("/:technologyId", (req, res) => {
         result
       });
     });
+});
+
+router.post("/:technologyId/vote", jsonParser, (req, res, next) => {
+  const opinion = req.body.opinion;
+  if (!allowedOpinions.includes(opinion)) {
+    return next({
+      msg: `${opinion} is not valid. Give one of ${allowedOpinions.join("|")}`
+    });
+  } else {
+    client
+      .callFunction("technology_vote", [
+        req.params.technologyId,
+        req.body.opinion
+      ])
+      .then(result => {
+        res.json({
+          result
+        });
+      });
+  }
 });
 
 module.exports = router;
