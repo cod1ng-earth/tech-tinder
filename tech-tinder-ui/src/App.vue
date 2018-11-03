@@ -21,6 +21,19 @@
             <router-link to="/stats" class="navbar-item" active-class="is-active">Stats</router-link>
             <router-link to="/about" class="navbar-item" active-class="is-active">About</router-link>
           </div>
+          <!-- login -->
+          <div class="navbar-end">
+            <form class="navbar-item" v-on:submit.prevent @submit="login">
+              <input class="input" type="text" placeholder="username" v-if="!loggedIn" v-model="username" />
+            </form>
+            <p class="navbar-item" v-if="loggedIn">
+              <span style="margin-right: 10px">Welcome {{username}}!</span>
+              <button class="button is-light" @click="logout">
+                <span class="icon"><i class="fas fa-sign-out-alt" /></span>
+                <span>Logout</span>
+              </button>
+            </p>
+          </div>
         </div>
       </div>
     </nav>
@@ -31,15 +44,32 @@
 <script>
 export default {
   data() {
+    const aUsername = localStorage.getItem('username');
+    const isLoggedIn = aUsername !== null;
+
     return {
-      showNavigation: false
-    }
+      showNavigation: false,
+      loggedIn: isLoggedIn,
+      username: aUsername
+    };
   },
 
   methods: {
     toggleNavigation: function() {
-      this.showNavigation = !this.showNavigation
+      this.showNavigation = !this.showNavigation;
+    },
+
+    login: function() {
+      this.loggedIn = true;
+      localStorage.setItem('username', this.username)
+    },
+
+    logout: function() {
+      this.username = null;
+      this.loggedIn = false;
+
+      localStorage.removeItem('username')
     }
   }
-}
+};
 </script>
