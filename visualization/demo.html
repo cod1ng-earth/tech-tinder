@@ -22,77 +22,71 @@
 		  // Do something for an error here
 		});
 		
-	
 
+		function createChart(technology){
+			var canvasElement = document.createElement("CANVAS");
+			canvasElement.height =20;
+			canvasElement.width = 100;
+			canvasElement.id =technology.id;
+			var body = document.getElementsByTagName("body")[0];
+			body.appendChild(canvasElement);
+			var canvasContext = canvasElement.getContext("2d");
+			var chartLabels = Object.keys(technology.votes.results);
+			var chartDataValues = Object.values(technology.votes.results);
+			var chartHeading = technology.name;
+			console.log("Technology id " + canvasElement.id);
+			
+			//the folllowing variables are the settings for the chart
+			var chartOptions =  {
+				        scales: {
+				            yAxes: [{
+				                ticks: {
+				                    beginAtZero:true,
+				                    min:0
+				                }
+				            }]
+				        },
+				        legend:{
+				        	display:true,
+				        	position:'bottom',
+				        	labels:{
+				        		boxWidth:0,
+				        		fontSize:20,
+				        		fontStyle:'Bold'
 
-function createChart(technology){
-	var canvasElement = document.createElement("CANVAS");
-	canvasElement.height =20;
-	canvasElement.width = 100;
-	canvasElement.id =technology.id;
-	var body = document.getElementsByTagName("body")[0];
-	body.appendChild(canvasElement);
-	var canvasContext = canvasElement.getContext("2d");
-	var chartLabels = Object.keys(technology.votes.results);
-	var chartDataValues = Object.values(technology.votes.results);
-	var chartHeading = technology.name;
-	console.log("Technology id " + canvasElement.id);
-	
-	//the folllowing variables are the settings for the chart
-	var chartOptions =  {
-		        scales: {
-		            yAxes: [{
-		                ticks: {
-		                    beginAtZero:true,
-		                    min:0
-		                }
-		            }]
-		        },
-		        legend:{
-		        	display:true,
-		        	position:'bottom',
-		        	labels:{
-		        		boxWidth:0,
-		        		fontSize:20,
-		        		fontStyle:'Bold'
+				        	}
+				        }
+				    };
 
-		        	}
-		        }
-		    };
+			var chart = new Chart(canvasContext, {
+				    type: 'bar',
+				    data: {
+				        labels: chartLabels,
+				        datasets: [{
+				            label: chartHeading,
+				            data: chartDataValues,
+				            backgroundColor: [
+				                'rgba(255, 99, 132, 0.2)',
+				                'rgba(54, 162, 235, 0.2)',
+				                'rgba(255, 206, 86, 0.2)',
+				                'rgba(75, 192, 192, 0.2)'
+				            ],
+				            borderColor: [
+				                'rgba(255,99,132,1)',
+				                'rgba(54, 162, 235, 1)',
+				                'rgba(255, 206, 86, 1)',
+				                'rgba(75, 192, 192, 1)',
+				                'rgba(153, 102, 255, 1)'
+				            ],
+				            borderWidth: 2
+				        }]
+				    },
+				    options: chartOptions
 
-	var chart = new Chart(canvasContext, {
-		    type: 'bar',
-		    data: {
-		        labels: chartLabels,
-		        datasets: [{
-		            label: chartHeading,
-		            data: chartDataValues,
-		            backgroundColor: [
-		                'rgba(255, 99, 132, 0.2)',
-		                'rgba(54, 162, 235, 0.2)',
-		                'rgba(255, 206, 86, 0.2)',
-		                'rgba(75, 192, 192, 0.2)'
-		            ],
-		            borderColor: [
-		                'rgba(255,99,132,1)',
-		                'rgba(54, 162, 235, 1)',
-		                'rgba(255, 206, 86, 1)',
-		                'rgba(75, 192, 192, 1)',
-		                'rgba(153, 102, 255, 1)'
-		            ],
-		            borderWidth: 2
-		        }]
-		    },
-		    options: chartOptions
-
-		});
+				});
 
 }
 	</script>
-
-
-
-
 
 
 	<!--This below is from p5.js for drawing stuff-->
