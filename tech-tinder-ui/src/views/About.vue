@@ -13,8 +13,8 @@
           <div class="columns">
             <div class="card column">
               <div class="card-image">
-                <figure class="image is-4by3">
-                    <img src="https://pbs.twimg.com/profile_images/1043621879565697027/bbNyS2na_400x400.jpg" alt="@stadolf" />
+                <figure class="image">
+                    <img class="is-circular" src="https://pbs.twimg.com/profile_images/1043621879565697027/bbNyS2na_400x400.jpg" alt="@stadolf" />
                 </figure>
               </div>
               <div class="card-content">                
@@ -27,8 +27,8 @@
             </div>
             <div class="card column">
               <div class="card-image">
-                <figure class="image is-4by3">
-                    <img src="https://pbs.twimg.com/profile_images/1644913323/4997364904_379244b53a_o_small_400x400.jpg" alt="@vollbio_de"/>
+                <figure class="image">
+                    <img class="is-circular" src="https://pbs.twimg.com/profile_images/1644913323/4997364904_379244b53a_o_small_400x400.jpg" alt="@vollbio_de"/>
                 </figure>
               </div>
               <div class="card-content">
@@ -41,8 +41,8 @@
             </div>
             <div class="card column">
               <div class="card-image">
-                <figure class="image is-4by3">
-                    <img src="https://avatars3.githubusercontent.com/u/11131751?s=460&v=4" alt="@PranavGulati95" />
+                <figure class="image">
+                    <img class="is-circular" src="https://avatars3.githubusercontent.com/u/11131751?s=460&v=4" alt="@PranavGulati95" />
                 </figure>
               </div>
               <div class="card-content">                
@@ -55,8 +55,8 @@
             </div>
             <div class="card column">
               <div class="card-image">
-                <figure class="image is-4by3">
-                    <img src="https://pbs.twimg.com/profile_images/501657315884662784/6PlH-UCl_400x400.jpeg" alt="@PranavGulati95" />
+                <figure class="image">
+                    <img class="is-circular" src="https://pbs.twimg.com/profile_images/501657315884662784/6PlH-UCl_400x400.jpeg" alt="@PranavGulati95" />
                 </figure>
               </div>
               <div class="card-content">                
@@ -72,4 +72,9 @@
       </div>
     </div>
   </section>
- </template>
+</template>
+<style scoped>
+.is-circular {
+  border-radius: 40%;
+}
+</style>
