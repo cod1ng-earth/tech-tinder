@@ -16,7 +16,7 @@
           </a>
         </div>
 
-        <div id="techTinderNav" class="navbar-menu" :class="{ 'is-active' : showNavigation }" @click="toggleNavigation">
+        <div id="techTinderNav" class="navbar-menu" :class="{ 'is-active' : showNavigation }" >
           <div class="navbar-start">
             <router-link to="/vote" class="navbar-item" active-class="is-active">Vote</router-link>
             <router-link to="/suggest" class="navbar-item" active-class="is-active">Suggest</router-link>
@@ -46,7 +46,7 @@
 <script>
 export default {
   data() {
-    const aUsername = localStorage.getItem('username');
+    const aUsername = localStorage.getItem("username");
     const isLoggedIn = aUsername !== null;
 
     return {
@@ -55,7 +55,12 @@ export default {
       username: aUsername
     };
   },
-
+  watch: {
+    $route: function(r) {
+      //console.log(r);
+      this.showNavigation = false;
+    }
+  },
   methods: {
     toggleNavigation: function() {
       this.showNavigation = !this.showNavigation;
@@ -63,18 +68,18 @@ export default {
 
     login: function() {
       this.loggedIn = true;
-      localStorage.setItem('username', this.username)
+      localStorage.setItem("username", this.username);
 
-      this.$router.go() // hack
+      this.$router.go(); // hack
     },
 
     logout: function() {
       this.username = null;
       this.loggedIn = false;
 
-      localStorage.removeItem('username')
+      localStorage.removeItem("username");
 
-      this.$router.go() // hack
+      this.$router.go(); // hack
     }
   }
 };

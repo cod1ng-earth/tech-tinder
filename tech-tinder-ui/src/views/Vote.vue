@@ -182,32 +182,25 @@ export default {
 
 <style>
 .card-viewport {
-  width: 60%;
+  width: 98%;
   height: 500px;
   background: white;
-  border: 5px solid #ddd;
-  margin: 10px auto 0;
+
+  margin: 5px auto 0;
   position: relative;
 }
 
 .card-viewport .card-stack {
   width: 100%;
-  height: 400px;
+  height: 450px;
   background: white;
   position: absolute;
   top: 5px;
-
-  margin-top: 30px;
-  /*margin-left: -100px;*/
-  /*left: 20%;
-  
-  border-radius: 10px;
-  */
 }
 
 .card-viewport .card-item {
   width: 90%;
-  height: 400px;
+  height: 550px;
   background: #fff;
   border-radius: 2px;
   position: absolute;
@@ -215,9 +208,10 @@ export default {
   left: 0;
   margin-left: 5%;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2), 1px 1px 1px rgba(0, 0, 0, 0.2);
-
   box-sizing: border-box;
   cursor: default;
+  overflow: hidden;
+  border-bottom: 15px solid white;
 }
 
 .card-viewport .card-item.in-deck:nth-child(3) {
@@ -229,6 +223,7 @@ export default {
   top: 4px;
   transform: translate(-4px, -2px) rotate(-1deg);
 }
+
 .tag-hint {
   position: absolute;
   z-index: 1;
@@ -237,7 +232,7 @@ export default {
 
 .tag-top {
   top: 10px;
-  left: 48%;
+  left: 38%;
 }
 
 .tag-left {
@@ -252,6 +247,27 @@ export default {
 
 .tag-bottom {
   bottom: 10px;
-  left: 47%;
+  left: 36%;
+}
+
+@media only screen and (min-width: 640px) {
+  .card-viewport {
+    width: 60%;
+    margin: 10px auto 0;
+  }
+  .card-viewport .card-stack {
+    margin-top: 30px;
+  }
+  .card-viewport .card-item {
+    width: 90%;
+    height: 450px;
+    margin-left: 5%;
+  }
+  .tag-top {
+    left: 48%;
+  }
+  .tag-bottom {
+    left: 47%;
+  }
 }
 </style>
