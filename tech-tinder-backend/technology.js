@@ -44,7 +44,7 @@ router.get("/:technologyId", (req, res) => {
     .callFunction("gettechnology", [req.params.technologyId])
     .then(result => {
       res.json({
-        result
+        result: result.res
       });
     });
 });
