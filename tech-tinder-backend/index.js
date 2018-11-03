@@ -33,6 +33,22 @@ app.post("/technology", jsonParser, (req, res) => {
   });
 });
 
+app.get("/technology/random", (req, res) => {
+  client.callFunction("random_technology", [null]).then(result => {
+    res.redirect("/technology/" + result.id);
+  });
+});
+
+app.get("/technology/:technologyId", (req, res) => {
+  client
+    .callFunction("gettechnology", [req.params.technologyId])
+    .then(result => {
+      res.json({
+        result
+      });
+    });
+});
+
 app.use((req, res, next) => {
   res.status(404).json({ status: "resource not found" });
 });
