@@ -69,7 +69,8 @@ router.post("/:technologyId/vote", jsonParser, (req, res, next) => {
     client
       .callFunction("technology_vote", [
         req.params.technologyId,
-        req.body.opinion
+        req.body.opinion,
+        req.body.userName
       ])
       .then(result => {
         res.json({

@@ -4,7 +4,7 @@ const csv = require("csvtojson");
 
 //get data from https://docs.google.com/spreadsheets/d/1YXkrgV7Y6zShiPeyw4Y5_19QOfu5I6CyH5sGnbkEyiI/edit#gid=0
 const csvFilePath = "./data/thoughtworks15.csv";
-
+const users = require("./fake-users");
 /*
  * use this to test it.
 function store(obj) {
@@ -13,8 +13,6 @@ function store(obj) {
     resolve(obj);
   });
 }*/
-
-const users = ["Thoughtworks", "Jan", "Robert", "Stefan", "Pranav"];
 
 csv()
   .fromFile(csvFilePath)
