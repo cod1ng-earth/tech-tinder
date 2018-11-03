@@ -53,7 +53,7 @@ export default {
   data() {
     return {
       isLoading: true,
-      opinion: '',
+      opinion: "",
       technology: this.nextTechnology()
     };
   },
@@ -77,16 +77,15 @@ export default {
         });
     },
     submitVote: function() {
-        TechnologyClient.addVote(this.technology._id, this.opinion).then(() => {
-            this.$toast.open({
-                message: "Vote saved.",
-                type: "is-success"
-            });
+      TechnologyClient.addVote(this.technology._id, this.opinion).then(() => {
+        this.$toast.open({
+          message: "Vote saved.",
+          type: "is-success"
+        });
 
-            this.opinion = '';
-            this.nextTechnology();
-        })
-      console.log(this.opinion);
+        this.opinion = "";
+        this.nextTechnology();
+      });
     }
   }
 };
