@@ -41,6 +41,16 @@ router.get("/:technologyId", (req, res) => {
     });
 });
 
+router.get("/:technologyId/stats", (req, res) => {
+  client
+    .callFunction("technology_stats", [req.params.technologyId])
+    .then(result => {
+      res.json({
+        result
+      });
+    });
+});
+
 router.post("/:technologyId/vote", jsonParser, (req, res, next) => {
   const opinion = req.body.opinion;
   if (!allowedOpinions.includes(opinion)) {
