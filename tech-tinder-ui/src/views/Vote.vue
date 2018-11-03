@@ -3,9 +3,10 @@
         <div class="hero-body">
             <div class="container" v-if="technology">
                 <h1 class="title is-1">{{ technology.name }}</h1>
-                <p class="title is-5">{{ technology.description }}</p>
+                <p class="title is-5" v-html="technology.description"/>
                 <div class="field">
                     <b-radio v-model="opinion"
+                        :disabled="!username"
                         @input="submitVote"
                         native-value="using"
                         size="is-large"
@@ -15,6 +16,7 @@
                 </div>
                 <div class="field">
                     <b-radio v-model="opinion"
+                        :disabled="!username"
                         @input="submitVote"
                         native-value="evaluating"
                         size="is-large"
@@ -24,6 +26,7 @@
                 </div>
                 <div class="field">
                     <b-radio v-model="opinion"
+                        :disabled="!username"
                         @input="submitVote"
                         native-value="interested"
                         size="is-large"
@@ -33,6 +36,7 @@
                 </div>
                 <div class="field">
                     <b-radio v-model="opinion"
+                        :disabled="!username"
                         @input="submitVote"
                         native-value="discouraged"
                         size="is-large"
@@ -58,6 +62,12 @@ export default {
     };
   },
 
+  computed: {
+      username: function() {
+          return localStorage.getItem('username');
+      }
+  },
+
   methods: {
     nextTechnology: function() {
       this.isLoading = true;
@@ -77,7 +87,7 @@ export default {
         });
     },
     submitVote: function() {
-      TechnologyClient.addVote(this.technology._id, this.opinion).then(() => {
+      TechnologyClient.addVote(this.technology._id, this.opinion, this.username).then(() => {
         this.$toast.open({
           message: "Vote saved.",
           type: "is-success"

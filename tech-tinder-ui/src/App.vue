@@ -62,6 +62,8 @@ export default {
     login: function() {
       this.loggedIn = true;
       localStorage.setItem('username', this.username)
+
+      this.$router.go() // hack
     },
 
     logout: function() {
@@ -69,6 +71,8 @@ export default {
       this.loggedIn = false;
 
       localStorage.removeItem('username')
+
+      this.$router.go() // hack
     }
   }
 };

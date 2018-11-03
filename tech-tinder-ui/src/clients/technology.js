@@ -13,8 +13,8 @@ export default {
         return axiosInstance.post(`/technology`, payload)
             .then((response) => response.data);
     },
-    addVote(id, opinion) {
-        return axiosInstance.post(`/technology/${id}/vote`, {opinion: opinion});
+    addVote(id, opinion, username) {
+        return axiosInstance.post(`/technology/${id}/vote`, {opinion: opinion, username: username});
     },
     getStats() {
         return axiosInstance.get(`/technology/stats`)
