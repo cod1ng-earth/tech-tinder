@@ -1,0 +1,22 @@
+{
+    "id": "5bdcc8b117639ef883f4dfde",
+    "database": "tech-tinder",
+    "collection": "technology",
+    "roles": [
+        {
+            "name": "default",
+            "apply_when": {},
+            "write": true,
+            "insert": true,
+            "delete": true,
+            "additional_fields": {}
+        }
+    ],
+    "schema": {
+        "properties": {
+            "_id": {
+                "bsonType": "objectId"
+            }
+        }
+    }
+}
