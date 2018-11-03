@@ -2,52 +2,19 @@ require("dotenv").config();
 const express = require("express");
 const expressLogging = require("express-logging");
 const logger = require("logops");
-const jsonParser = require("body-parser").json();
 const cors = require("cors");
 
-const client = require("./stitch-client.js");
+const technology = require("./technology");
 
 const app = express();
 app.use(expressLogging(logger));
+
 app.use(cors());
 app.options("*", cors());
 
 const port = process.env.PORT || 3000;
 
-app.get("/technology", function(req, res) {
-  client
-    .callFunction("technologies", [null])
-    .then(result => {
-      res.json(result);
-    })
-    .catch(e => logger.fatal(e));
-});
-
-app.post("/technology", jsonParser, (req, res) => {
-  const technology = req.body;
-  client.callFunction("addtechnology", [technology]).then(result => {
-    res.json({
-      result: "created",
-      id: result.insertedId
-    });
-  });
-});
-
-app.get("/technology/random", (req, res) => {
-  client.callFunction("random_technology", [null]).then(result => {
-    res.redirect("/technology/" + result.id);
-  });
-});
-
-app.get("/technology/:technologyId", (req, res) => {
-  client
-    .callFunction("gettechnology", [req.params.technologyId])
-    .then(result => {
-      res.json({
-        result
-      });
-    });
-});
+app.use("/technology", technology);
 
 app.use((req, res, next) => {
   res.status(404).json({ status: "resource not found" });
