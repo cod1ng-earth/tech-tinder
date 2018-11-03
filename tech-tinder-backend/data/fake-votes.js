@@ -27,7 +27,7 @@ const fakeVotes = (technologies, fakeCount) => {
 };
 
 client.callFunction("technologies").then(res => {
-  const ps = fakeVotes(res.technologies, 100);
+  const ps = fakeVotes(res.technologies, 150);
   Promise.all(ps).then(r => {
     console.log("all done");
   });

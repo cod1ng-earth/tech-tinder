@@ -1,3 +1,8 @@
-const users = ["Thoughtworks", "Jan", "Robert", "Stefan", "Pranav"];
+var faker = require("faker");
+
+let users = [];
+for (let i = 100; i-- > 0; ) {
+  users.push(faker.internet.userName());
+}
 
 module.exports = users;
