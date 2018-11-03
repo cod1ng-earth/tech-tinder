@@ -55,11 +55,27 @@ router.get("/:technologyId/stats", (req, res) => {
     client.callFunction("technology_get_votes", [req.params.technologyId])
   ];
   Promise.all(promises).then(allResults => {
-    result = allResults[0][0]; // not nice but... necessary?
-    result.users = allResults[1];
-    res.json({
-      result
-    });
+    if (allResults[0].length == 0) {
+      client
+        .callFunction("gettechnology", [req.params.technologyId])
+        .then(techResult => {
+          techResult = techResult.res;
+          techResult.votes = {
+            total: 0,
+            results: {}
+          };
+          techResult.users = {};
+          res.json({
+            result: techResult
+          });
+        });
+    } else {
+      result = allResults[0][0]; // not nice but... necessary?
+      result.users = allResults[1];
+      res.json({
+        result
+      });
+    }
   });
 });
 
