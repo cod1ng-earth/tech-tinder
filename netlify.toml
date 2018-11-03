@@ -9,3 +9,8 @@
   base    = "tech-tinder-ui"
   publish = "tech-tinder-ui/dist"
   command = "npm run build"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
