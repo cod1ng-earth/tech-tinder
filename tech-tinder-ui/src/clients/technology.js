@@ -14,7 +14,7 @@ export default {
             .then((response) => response.data);
     },
     addVote(id, opinion, username) {
-        return axiosInstance.post(`/technology/${id}/vote`, { opinion: opinion, username: username });
+        return axiosInstance.post(`/technology/${id}/vote`, { opinion: opinion, userName: username });
     },
     getStats() {
         return axiosInstance.get(`/technology/stats`)
