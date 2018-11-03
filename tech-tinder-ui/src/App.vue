@@ -4,7 +4,9 @@
       <div class="container">
         <div class="navbar-brand">
           <router-link to="/" class="navbar-item">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Logo-Tinder.svg/572px-Logo-Tinder.svg.png" width="74" height="28">
+            <span class="icon">
+              <i class="fas fa-bullseye fa-3x"></i>
+            </span>
           </router-link>
 
           <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="techTinderNav" @click="toggleNavigation">
