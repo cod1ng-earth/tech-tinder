@@ -54,18 +54,21 @@
 import TechnologyClient from "~/clients/technology.js";
 
 export default {
+  mounted() {
+    this.nextTechnology();
+  },
   data() {
     return {
       isLoading: true,
       opinion: "",
-      technology: this.nextTechnology()
+      technology: null
     };
   },
 
   computed: {
-      username: function() {
-          return localStorage.getItem('username');
-      }
+    username: function() {
+      return localStorage.getItem("username");
+    }
   },
 
   methods: {
@@ -74,7 +77,7 @@ export default {
 
       TechnologyClient.getRandom()
         .then(data => {
-          this.technology = data.result.res;
+          this.technology = data.result;
           this.isLoading = false;
         })
         .catch(error => {
@@ -87,7 +90,11 @@ export default {
         });
     },
     submitVote: function() {
-      TechnologyClient.addVote(this.technology._id, this.opinion, this.username).then(() => {
+      TechnologyClient.addVote(
+        this.technology._id,
+        this.opinion,
+        this.username
+      ).then(() => {
         this.$toast.open({
           message: "Vote saved.",
           type: "is-success"
