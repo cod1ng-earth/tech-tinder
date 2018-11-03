@@ -44,19 +44,23 @@ router.get("/:technologyId", (req, res) => {
     .callFunction("gettechnology", [req.params.technologyId])
     .then(result => {
       res.json({
-        result
+        result: result.res
       });
     });
 });
 
 router.get("/:technologyId/stats", (req, res) => {
-  client
-    .callFunction("technology_aggregate", [req.params.technologyId])
-    .then(result => {
-      res.json({
-        result
-      });
+  const promises = [
+    client.callFunction("technology_aggregate", [req.params.technologyId]),
+    client.callFunction("technology_get_votes", [req.params.technologyId])
+  ];
+  Promise.all(promises).then(allResults => {
+    result = allResults[0][0]; // not nice but... necessary?
+    result.users = allResults[1];
+    res.json({
+      result
     });
+  });
 });
 
 router.post("/:technologyId/vote", jsonParser, (req, res, next) => {
