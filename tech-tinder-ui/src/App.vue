@@ -9,14 +9,15 @@
             </span>
           </router-link>
 
-          <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="techTinderNav" @click="toggleNavigation">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-          </a>
+          <span role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="techTinderNav" @click="toggleNavigation">
+            <span aria-hidden="true" v-if="!loggedIn"></span>
+            <span aria-hidden="true" v-if="!loggedIn"></span>
+            <span aria-hidden="true" v-if="!loggedIn"></span>
+            <i class="fa fa-user" v-if="loggedIn"></i>
+          </span>
         </div>
 
-        <div id="techTinderNav" class="navbar-menu" :class="{ 'is-active' : showNavigation }" @click="toggleNavigation">
+        <div id="techTinderNav" class="navbar-menu" :class="{ 'is-active' : showNavigation }" >
           <div class="navbar-start">
             <router-link to="/vote" class="navbar-item" active-class="is-active">Vote</router-link>
             <router-link to="/suggest" class="navbar-item" active-class="is-active">Suggest</router-link>
@@ -25,8 +26,17 @@
           </div>
           <!-- login -->
           <div class="navbar-end">
-            <form class="navbar-item" v-on:submit.prevent @submit="login">
-              <input class="input" type="text" placeholder="username" v-if="!loggedIn" v-model="username" />
+            <form class="navbar-item" v-on:submit.prevent @submit="login" v-if="!loggedIn">
+              <div class="field has-addons has-addons-centered">
+                <p class="control">
+                  <input class="input" type="text" placeholder="username" v-model="username" />
+                </p>
+                <p class="control">
+                  <button type="submit" class="button is-primary">
+                    Login
+                  </button>
+                </p>
+              </div>
             </form>
             <p class="navbar-item" v-if="loggedIn">
               <span style="margin-right: 10px">Welcome {{username}}!</span>
@@ -46,7 +56,7 @@
 <script>
 export default {
   data() {
-    const aUsername = localStorage.getItem('username');
+    const aUsername = localStorage.getItem("username");
     const isLoggedIn = aUsername !== null;
 
     return {
@@ -55,7 +65,11 @@ export default {
       username: aUsername
     };
   },
-
+  watch: {
+    $route: function() {
+      this.showNavigation = false;
+    }
+  },
   methods: {
     toggleNavigation: function() {
       this.showNavigation = !this.showNavigation;
@@ -63,19 +77,29 @@ export default {
 
     login: function() {
       this.loggedIn = true;
-      localStorage.setItem('username', this.username)
+      localStorage.setItem("username", this.username);
 
-      this.$router.go() // hack
+      this.$router.go(); // hack
     },
 
     logout: function() {
       this.username = null;
       this.loggedIn = false;
 
-      localStorage.removeItem('username')
+      localStorage.removeItem("username");
 
-      this.$router.go() // hack
+      this.$router.go(); // hack
     }
   }
 };
 </script>
+
+<style>
+.burger .fa-user {
+  position: absolute;
+  margin: 0 auto;
+  top: 15px;
+  left: 18px;
+}
+</style>
+
