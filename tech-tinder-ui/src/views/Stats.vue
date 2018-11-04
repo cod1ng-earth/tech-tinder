@@ -1,7 +1,17 @@
 <template>
     <section>
         <div class="container hero-body">
-            <div class="box" v-for="stat in stats" :key="stat._id">
+          <div class="tabs is-toggle is-toggle-rounded">
+            <ul>
+              <li v-for="category in categories" :key="category" v-bind:class="{ 'is-active': currentCategory == category }">
+                <a @click="currentCategory = category">
+                  <span>{{category}}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+            <div class="box" v-for="stat in stats[currentCategory]" :key="stat._id">
                 <div class="media">
                     <div class="media-left">
                         <stats-chart :data-holder="createDataHolder(stat)" :options="barOptions"></stats-chart>
@@ -21,6 +31,13 @@
 import TechnologyClient from "~/clients/technology.js";
 import StatsChart from "@/StatsChart";
 
+const CATEGORIES = [
+  "languages & frameworks",
+  "tools",
+  "platforms",
+  "techniques"
+];
+
 export default {
   mounted() {
     this.loadStats();
@@ -28,7 +45,8 @@ export default {
   data() {
     return {
       isLoading: true,
-      stats: null,
+      stats: {},
+      currentCategory: "languages & frameworks",
       barOptions: {
         scales: {
           yAxes: [
@@ -46,19 +64,29 @@ export default {
       }
     };
   },
-
+  computed: {
+    categories: function() {
+      return CATEGORIES;
+    }
+  },
   methods: {
     loadStats: function() {
       TechnologyClient.getStats()
         .then(data => {
-          this.stats = data.result.map(stat => {
-            let results = stat.votes.results;
-            stat.votes.results = Object.assign(
+          let stats = {};
+
+          data.result.forEach(result => {
+            let results = result.votes.results;
+            result.votes.results = Object.assign(
               { using: 0, evaluating: 0, interested: 0, discouraged: 0 },
               results
             );
-            return stat;
+            if (!stats[result.category]) {
+              stats[result.category] = [];
+            }
+            stats[result.category].push(result);
           });
+          this.stats = stats;
           this.isLoading = false;
         })
         .catch(error => {
