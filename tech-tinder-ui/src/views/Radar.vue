@@ -103,10 +103,10 @@ export default {
       const footer_offset = { x: -675, y: 420 };
 
       const legend_offset = [
-        { x: 450, y: 90 },
+        { x: 450, y: 130 },
         { x: -675, y: 90 },
-        { x: -675, y: -310 },
-        { x: 450, y: -310 }
+        { x: -675, y: -400 },
+        { x: 450, y: -400 }
       ];
 
       function polar(cartesian) {
@@ -309,10 +309,10 @@ export default {
       }
 
       function legend_transform(quadrant, ring, index = null) {
-        var dx = ring < 2 ? 0 : 120;
-        var dy = index == null ? -16 : index * 12;
+        var dx = ring < 2 ? 0 : 170;
+        var dy = index == null ? -18 : index * 20;
         if (ring % 2 == 1) {
-          dy = dy + 36 + segmented[quadrant][ring - 1].length * 12;
+          dy = dy + 36 + segmented[quadrant][ring - 1].length * 20;
         }
         return translate(
           legend_offset[quadrant].x + dx,
@@ -375,7 +375,9 @@ export default {
                 return "legendItem" + d.id;
               })
               .text(function(d, i) {
-                return d.id + ". " + d.label;
+                let lll = 18; // legend label length
+                let legendLabel = d.label.length < lll ? d.label : (d.label.substring(1,lll-2) + '..');
+                return d.id + ". " + legendLabel;
               })
               .style("font-family", "Arial, Helvetica")
               .style("font-size", "11")
