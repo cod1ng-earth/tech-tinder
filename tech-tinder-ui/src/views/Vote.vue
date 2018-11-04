@@ -16,9 +16,15 @@
                   @throwout="throwout"
                   @throwin="throwin"
                   >
-                  <div class="box card-item" :data-key="technology._id" >
-                    <h1 class="title is-3">{{ technology.name }}</h1>
-                    <p class="is-5" v-html="technology.description"/>
+                  <div class="card card-item" :data-key="technology._id" >
+                    <div class="card-image">
+                      <figure class="image">
+                        <h1 class="title is-3">{{ technology.name }}</h1>
+                      </figure>
+                    </div>
+                    <div class="card-content">
+                      <p class="is-5" v-html="technology.description"/>
+                    </div>
                   </div>
                 </vue-swing>
               </div>
@@ -213,7 +219,21 @@ export default {
   overflow: hidden;
   border-bottom: 15px solid white;
 }
+.card-viewport .card.card-item .card-image figure {
+  height: 130px;
+  background: url("/cardbg.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position-y: bottom;
+}
 
+.card-viewport .card.card-item .card-image figure h1 {
+  text-align: center;
+  top: 50px;
+  position: relative;
+  display: block;
+  color: white;
+}
 .card-viewport .card-item.in-deck:nth-child(3) {
   top: 5px;
   transform: translate(5px, 5px) rotate(0.4deg);
