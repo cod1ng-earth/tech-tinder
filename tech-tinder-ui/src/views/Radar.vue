@@ -1,5 +1,5 @@
 <template>
-    <section>
+    <section class="scrolling-wrapper">
         <div class="has-text-centered">
             <svg id="radar"></svg>
         </div>
@@ -582,3 +582,9 @@ export default {
   }
 };
 </script>
+<style>
+.scrolling-wrapper {
+  overflow-x: auto;
+  overflow-y: auto;
+}
+</style>
