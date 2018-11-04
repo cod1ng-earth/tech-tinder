@@ -183,7 +183,7 @@ export default {
 <style>
 .card-viewport {
   width: 98%;
-  height: 500px;
+  height: 450px;
   background: white;
 
   margin: 5px auto 0;
@@ -200,7 +200,7 @@ export default {
 
 .card-viewport .card-item {
   width: 90%;
-  height: 550px;
+  height: 450px;
   background: #fff;
   border-radius: 2px;
   position: absolute;

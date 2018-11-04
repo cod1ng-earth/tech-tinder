@@ -26,8 +26,17 @@
           </div>
           <!-- login -->
           <div class="navbar-end">
-            <form class="navbar-item" v-on:submit.prevent @submit="login">
-              <input class="input" type="text" placeholder="username" v-if="!loggedIn" v-model="username" />
+            <form class="navbar-item" v-on:submit.prevent @submit="login" v-if="!loggedIn">
+              <div class="field has-addons has-addons-centered">
+                <p class="control">
+                  <input class="input" type="text" placeholder="username" v-model="username" />
+                </p>
+                <p class="control">
+                  <button type="submit" class="button is-primary">
+                    Login
+                  </button>
+                </p>
+              </div>
             </form>
             <p class="navbar-item" v-if="loggedIn">
               <span style="margin-right: 10px">Welcome {{username}}!</span>
