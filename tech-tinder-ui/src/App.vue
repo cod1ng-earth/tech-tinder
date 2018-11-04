@@ -9,11 +9,12 @@
             </span>
           </router-link>
 
-          <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="techTinderNav" @click="toggleNavigation">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-          </a>
+          <span role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="techTinderNav" @click="toggleNavigation">
+            <span aria-hidden="true" v-if="!loggedIn"></span>
+            <span aria-hidden="true" v-if="!loggedIn"></span>
+            <span aria-hidden="true" v-if="!loggedIn"></span>
+            <i class="fa fa-user" v-if="loggedIn"></i>
+          </span>
         </div>
 
         <div id="techTinderNav" class="navbar-menu" :class="{ 'is-active' : showNavigation }" >
@@ -56,8 +57,7 @@ export default {
     };
   },
   watch: {
-    $route: function(r) {
-      //console.log(r);
+    $route: function() {
       this.showNavigation = false;
     }
   },
@@ -84,3 +84,13 @@ export default {
   }
 };
 </script>
+
+<style>
+.burger .fa-user {
+  position: absolute;
+  margin: 0 auto;
+  top: 15px;
+  left: 18px;
+}
+</style>
+
