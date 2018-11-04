@@ -32,7 +32,7 @@
                   <input class="input" type="text" placeholder="username" v-model="username" />
                 </p>
                 <p class="control">
-                  <button type="submit" class="button is-primary">
+                  <button type="submit" class="button is-primary" :disabled="!username || username.length < 4">
                     Login
                   </button>
                 </p>
