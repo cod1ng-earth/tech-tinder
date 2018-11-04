@@ -109,7 +109,6 @@ export default {
         datasets: [
           {
             label: stat.name,
-            backgroundColor: "#f87979",
             data: Object.values(stat.votes.results),
             backgroundColor: [
               "rgba(32, 156, 238, 0.4)",
