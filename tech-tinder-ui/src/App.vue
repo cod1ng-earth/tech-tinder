@@ -22,6 +22,7 @@
             <router-link to="/vote" class="navbar-item" active-class="is-active">Vote</router-link>
             <router-link to="/suggest" class="navbar-item" active-class="is-active">Suggest</router-link>
             <router-link to="/stats" class="navbar-item" active-class="is-active">Stats</router-link>
+            <router-link to="/radar" class="navbar-item" active-class="is-active">Radar</router-link>
             <router-link to="/about" class="navbar-item" active-class="is-active">About</router-link>
           </div>
           <!-- login -->

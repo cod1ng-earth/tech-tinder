@@ -1,8 +1,9 @@
 <template>
     <section>
-        <div class="box has-text-centered">
+        <div class="has-text-centered">
             <svg id="radar"></svg>
         </div>
+        <b-loading :active.sync="isLoading"></b-loading>
     </section>
 </template>
 <script>
@@ -38,11 +39,14 @@ export default {
         // zoomed_quadrant: 0,
         entries: this.technologies
       });
+
+      this.isLoading = false;
     });
   },
 
   data() {
     return {
+      isLoading: true,
       technologies: [],
       quadrants: [
         { name: "languages & frameworks" },
