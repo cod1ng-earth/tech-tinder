@@ -34,6 +34,10 @@ export default new Router({
     {
       path: '/stats/:id',
       component: () => import('./views/StatsDetails.vue')
+    },
+    {
+      path: '/radar',
+      component: () => import('./views/Radar.vue')
     }
   ]
 })
