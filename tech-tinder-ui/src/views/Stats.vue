@@ -11,15 +11,20 @@
             </ul>
           </div>
 
-            <div class="box" v-for="stat in stats[currentCategory]" :key="stat._id">
-                <div class="media">
-                    <div class="media-left">
-                        <stats-chart :data-holder="createDataHolder(stat)" :options="barOptions"></stats-chart>
+            <div v-for="stat in stats[currentCategory]" :key="stat._id">
+                <div class="title is-4 is-hidden-desktop">
+                    <router-link :to="'/stats/'+stat._id">{{ stat.name }}</router-link>
+                </div>
+                <div class="columns">
+                  <div class="column">
+                    <stats-chart :data-holder="createDataHolder(stat)" :options="barOptions"></stats-chart>
+                  </div>
+                  <div class="column">
+                    <div class="title is-4 is-hidden-mobile">
+                        <router-link :to="'/stats/'+stat._id">{{ stat.name }}</router-link>
                     </div>
-                    <div class="media-content">
-                        <div class="title is-4"><router-link :to="'/stats/'+stat._id">{{ stat.name }}</router-link></div>
-                        <div v-html="stat.description"></div>
-                    </div>
+                    <div v-html="stat.description"></div>
+                  </div>
                 </div>
             </div>
         </div>
@@ -124,3 +129,8 @@ export default {
 };
 </script>
 
+<style scoped>
+.title.is-4.is-hidden-desktop {
+  margin-top: 30px;
+}
+</style>
