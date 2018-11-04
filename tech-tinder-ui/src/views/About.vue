@@ -5,6 +5,7 @@
         <div>
           <h1 class="title">Tech-Tinder</h1>
           <p class="subtitle is-5"><a href="https://tech-tinder.netlify.com">https://tech-tinder.netlify.com</a></p>
+          <p class="subtitle is-5"><a href="https://github.com/coding-berlin/tech-tinder" target="_blank">https://github.com/coding-berlin/tech-tinder</a></p>
           <p>Made with 🍕 during <a href="https://www.codecamp-heilbronn.de/" target="_blank">Codecamp Heilbronn 2018</a>.</p>
           <div class="columns">
             <div class="column">
