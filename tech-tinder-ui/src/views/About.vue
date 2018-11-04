@@ -6,7 +6,16 @@
           <h1 class="title">Tech-Tinder</h1>
           <p class="subtitle is-5"><a href="https://tech-tinder.netlify.com">https://tech-tinder.netlify.com</a></p>
           <p>Made with 🍕 during <a href="https://www.codecamp-heilbronn.de/" target="_blank">Codecamp Heilbronn 2018</a>.</p>
-          <p><img :src="qr" alt="qr code" /></p>
+          <div class="columns">
+            <div class="column">
+              <img :src="qr" alt="qr code" />
+            </div>
+            <div class="column">
+              <h1 class="title is-size-1">
+                https://is.gd/hsnbrg
+              </h1>
+            </div>
+            </div>
         </div>
         <div>
           <h2 class="title">Team Heisenberg</h2>
