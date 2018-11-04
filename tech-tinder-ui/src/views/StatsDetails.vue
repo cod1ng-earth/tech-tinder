@@ -2,11 +2,15 @@
     <section>
        <div class="container hero-body">
             <div class="box" v-if="stat">
-                <div class="media">
-                    <div class="media-left">
+                <div class="columns">
+                    <div class="column is-hidden-tablet">
+                        <div class="title is-4">{{ stat.name }}</div>
+                        <div v-html="stat.description"></div>
+                    </div>
+                    <div class="column is-one-quarter">
                         <stats-chart :data-holder="createDataHolder(stat)" :options="barOptions"></stats-chart>
                     </div>
-                    <div class="media-content">
+                    <div class="column is-hidden-mobile">
                         <div class="title is-4">{{ stat.name }}</div>
                         <div v-html="stat.description"></div>
                     </div>
